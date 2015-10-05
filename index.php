@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Hello</title>
-</head>
-<body>
-	<H2>Hello ребята!!!</H2>
-</body>
-</html>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once 'model/model.php';
+include_once 'controller/controllers.php';
+require_once 'vendor/autoload.php';
+include_once 'route/routing.php';
+
+$response->send();
+?>
+
+
+

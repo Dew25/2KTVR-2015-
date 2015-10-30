@@ -4,7 +4,9 @@
 		<?php //это коментарий
 		foreach ($posts as $post): ?>
 			<li>
-				<a href="index.php/show?id=<?php echo $post['id'];?>">
+
+				<a href="/2KTVR-2015-/index.php/show?id=<?php echo $post['id'];?>">
+
 					<?php echo $post['id'] . '. ' . $post['title'];?>
 				</a>
 			</li>

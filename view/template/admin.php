@@ -1,6 +1,8 @@
 <?php ob_start();?>
+
 	<h2>Администрирование странички</h2>
 <form action="/toSymf2/index.php/add" method="POST" name="add_form">
+
 	<table>
 		<tr>
 			<td>Автор: </td>
@@ -21,6 +23,7 @@
 		<tr>
 			<td><input type="reset" name="reset" value="Очистить"></td>
 			<td><input type="submit" name="submit" value="Добавить"></td>
+
 		</tr>
 	</table>
 </form>

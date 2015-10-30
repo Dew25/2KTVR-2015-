@@ -1,44 +1,47 @@
 <?php
 use Symfony\Component\HttpFoundation\Response;
-echo 'test1';
+
+function render_template($path, array $args)
+{
+	extract($args);
+	ob_start();
+	require $path;
+	$html=ob_get_clean();
+	return $html;
+}
+
 function list_action() {
 	$posts = get_all_posts();
-	$html=render_template('view/template/list.php', array('posts' => $posts));
-
+	$html=render_template("view/template/list.php",array('posts'=>$posts));
 	return new Response($html);
 }
-
 function show_action($id){
 	$post=get_post_by_id($id);
-	$html=render_template('view/template/show.php', array('post' => $post));
-
-	return new Response($html);
+	require 'view/template/show.php';
 }
-
 function admin_action(){
 	$posts = get_all_posts();
-	$html=render_template('view/template/admin.php', array('posts' => $posts));
-
-	return new Response($html);
+	global $test;
+	if($test==true)var_dump_to_file($posts,'log_posts.txt');
+	require 'view/template/admin.php';
 }
 
 function add_action(){
+//echo "hello controller1";
 	add_post();
 	$posts = get_all_posts();
-	$html=render_template('view/template/admin.php', array('posts' => $posts));
-
-	return new Response($html);
+//var_dump($posts);
+	require 'view/template/admin.php';
 }
 
-// функция помощник (helper), которая возвращает
-// html из указанного шаблона, передавая ему 
-// массив данных вычисленных моделью.
-function render_template($path, array $args)
+function about_action()
 {
-    extract($args);
-    ob_start();
-    require $path;
-    $html = ob_get_clean();
+	require 'view/template/about.php';
+}
 
-    return $html;
+function update_action(){
+	update();
+	$posts = get_all_posts();
+	require 'view/template/admin.php';
+
 }

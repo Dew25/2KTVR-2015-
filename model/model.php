@@ -33,10 +33,16 @@ function get_post_by_id($id){
 function add_post()
 {
 	
-	if(!empty($_REQUEST['add_autor']) 
-		AND !empty($_REQUEST['add_date']) 
-			AND !empty($_REQUEST['add_title']) 
-				AND !empty($_REQUEST['add_content'])){
+
+	if(empty($_REQUEST['add_autor']) 
+		AND empty($_REQUEST['add_date']) 
+			AND empty($_REQUEST['add_title']) 
+				AND empty($_REQUEST['add_content'])){
+
+		echo "Пропущена запись!";
+		return;
+	}
+
 
 		$add_autor=$_REQUEST['add_autor'];
 		$add_date=$_REQUEST['add_date'];
@@ -50,9 +56,32 @@ function add_post()
 			mysql_query($sql, $link) OR die("Запрос не выполнен ".mysql_error());
 		close_database_connection($link);
 	
-	}else{
+	return;
+}
+function update()
+{
+	
+	if(empty($_REQUEST['id'])
+		AND empty($_REQUEST['add_autor']) 
+			AND empty($_REQUEST['add_date']) 
+				AND empty($_REQUEST['add_title']) 
+					AND empty($_REQUEST['add_content'])){
+
 		echo "Пропущена запись!";
+		return;
 	}
+		$id=$_REQUEST['id'];
+		$add_autor=$_REQUEST['add_autor'];
+		$add_date=$_REQUEST['add_date'];
+		$add_title=$_REQUEST['add_title'];
+		$add_content=$_REQUEST['add_content'];
+		$sql="UPDATE `post` SET `date`='$add_date',`autor`='$add_autor',
+			`title`='$add_title',`content`='$add_content' 
+								WHERE id='$id'";
+		$link = open_database_connection();
+			mysql_query($sql, $link) OR die("Запрос не выполнен ".mysql_error());
+		close_database_connection($link);
+	
 	return;
 }
 

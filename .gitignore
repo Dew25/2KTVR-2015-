@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 vendor/
 vendor
+=======
+*.txt
+vendor/
+test/
+>>>>>>> ef16fcb2f11dbea60920c43504480ee3540b2749

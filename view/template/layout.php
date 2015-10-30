@@ -5,8 +5,9 @@
 	<title>Hello</title>
 </head>
 <body>
-	<H2>Hello ребята!!!</H2>
-	<H2>Hello ребята2!!!</H2>
+
+<h1>Это новый дизайн странички :)</h1>
 	<?php echo $content;?>
+	
 </body>
 </html>

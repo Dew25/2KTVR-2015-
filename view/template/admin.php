@@ -1,6 +1,6 @@
 <?php ob_start();?>
 	<h2>Администрирование странички</h2>
-<form action="index.php/add" method="POST" name="add_form">
+<form action="/toSymf2/index.php/add" method="POST" name="add_form">
 	<table>
 		<tr>
 			<td>Автор: </td>

@@ -6,6 +6,7 @@
 </head>
 <body>
 	<H2>Hello ребята!!!</H2>
+	<H2>Hello ребята2!!!</H2>
 	<?php echo $content;?>
 </body>
 </html>

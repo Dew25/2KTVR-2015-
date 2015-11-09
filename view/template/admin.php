@@ -1,16 +1,12 @@
 <?php ob_start();?>
 
 	<h2>Администрирование странички</h2>
-<form action="/toSymf2/index.php/add" method="POST" name="add_form">
+<form action="/2KTVR2015/index.php/add" method="POST" name="add_form">
 
 	<table>
 		<tr>
 			<td>Автор: </td>
 			<td><input type="text" name="add_autor"></td>
-		</tr>
-		<tr>
-			<td>Дата: </td>
-			<td><input type="calendar" name="add_date"></td>
 		</tr>
 		<tr>
 			<td>Заголовок: </td>
@@ -32,7 +28,7 @@
 		<?php //это коментарий
 		foreach ($posts as $post): ?>
 			<li>
-				<a href="/2KTVR-2015-/index.php/show?id=<?php echo $post['id'];?>">
+				<a href="/2KTVR2015/index.php/show?id=<?php echo $post['id'];?>">
 					<?php echo $post['id'] . '. ' . $post['title'];?>
 				</a>
 			</li>

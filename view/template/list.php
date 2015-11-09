@@ -5,7 +5,7 @@
 		foreach ($posts as $post): ?>
 			<li>
 
-				<a href="/2KTVR-2015-/index.php/show?id=<?php echo $post['id'];?>">
+				<a href="/2KTVR2015/index.php/show?id=<?php echo $post['id'];?>">
 
 					<?php echo $post['id'] . '. ' . $post['title'];?>
 				</a>

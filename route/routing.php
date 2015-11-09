@@ -14,13 +14,13 @@ if ($uri == '/') {
 	$response=list_action();
 }elseif($uri=='/show' && $request->query->has('id')){
 	$response=show_action($request->query->get('id'));
-}elseif($uri=='/2KTVR-2015-/index.php/admin'){
+}elseif($uri=='/admin'){
 	admin_action();
-}elseif($uri=='/2KTVR-2015-/index.php/add'){
+}elseif($uri=='/add'){
 	add_action();
-}elseif($uri=='/2KTVR-2015-/index.php/about'){
+}elseif($uri=='/about'){
 	about_action();
-}elseif($uri=='/2KTVR-2015-/index.php/update'){
+}elseif($uri=='/update'){
 	update_action();
 }
 

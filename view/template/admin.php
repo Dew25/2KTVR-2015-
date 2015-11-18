@@ -1,7 +1,7 @@
 <?php ob_start();?>
 
 	<h2>Администрирование странички</h2>
-<form action="/2KTVR2015/index.php/add" method="POST" name="add_form">
+<form action="/add" method="POST" name="add_form">
 
 	<table>
 		<tr>
@@ -24,16 +24,19 @@
 	</table>
 </form>
 <h3>Список постов</h3>
-	<ul><!--Это коментарий -->
+	<ol><!--Это коментарий -->
 		<?php //это коментарий
 		foreach ($posts as $post): ?>
 			<li>
-				<a href="/2KTVR2015/index.php/show?id=<?php echo $post['id'];?>">
-					<?php echo $post['id'] . '. ' . $post['title'];?>
+				<a href="/show?id=<?php echo $post['id'];?>">
+					<?php echo $post['title'];?>
+				</a>
+				<a href="/delete?id=<?php echo $post['id'];?>">
+					x
 				</a>
 			</li>
 		<?php endforeach;?>
-	</ul>
+	</ol>
 <?php $content = ob_get_clean();?>
 
 <?php include 'view/template/layout.php';?>

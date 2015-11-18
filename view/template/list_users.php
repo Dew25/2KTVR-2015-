@@ -5,9 +5,9 @@
 		foreach ($posts as $post): ?>
 			<li>
 
-				<a href="/show?id=<?php echo $post['id'];?>">
+				<a href="/ushow?id=<?php echo $user['uid'];?>">
 
-					<?php echo  $post['title'];?>
+					<?php echo $user['firstname']." ".$user['lastname'];?>
 				</a>
 			</li>
 		<?php endforeach;?>

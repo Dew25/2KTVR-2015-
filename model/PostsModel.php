@@ -1,5 +1,5 @@
 <?php
-class Model{
+class PostsModel{
 	private $dbh;
 	private $user="mvcpattern";
 	private $pass="mvcpattern";
@@ -11,20 +11,17 @@ class Model{
 	*	Конструктор
 	*	http://phpfaq.ru/pdo
 	*/
-	function Model(){	
-		$dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
+	function PostsModel(){	
+		$dsn = "mysql:host=$this->host;
+					dbname=$this->db;
+						charset=$this->charset";
 		$opt = array(
 		    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 		    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 		);
-		try {
-			$this->dbh = new PDO($dsn, $this->user, $this->pass, $opt);
-			
-		} catch (Exception $e) {
-			echo "error! "+$e;
-		}
-
 		
+			$this->dbh = new PDO($dsn, $this->user, $this->pass, $opt);
+
 	}
 
 	/**
@@ -69,11 +66,11 @@ class Model{
 		return $post;
 	}
 
+	
 	/**
 	 * Добавляет запись в таблицу post
-	 * 
-	 * false - если добавление неудалось
-	 * true  - если добавление сделано.
+	 *
+	 * @return  boolean  удалось или нет добавление
 	 */
 	public function add_post(){
 		if(empty($_REQUEST['add_autor']) 
@@ -102,11 +99,15 @@ class Model{
 	}
 
 	/**
-	 * Обновляем запись с $id=$_REQUEST['id'];
+	 * 
 	 * 
 	 * Возвращает:
 	 * false - если обновление неудалось
 	 * true  - если обновение сделано.
+	 */
+	/**
+	 * Обновляем запись с $id=$_REQUEST['id'];
+	 * @return boolean	удалось или неудалось обновление
 	 */
 	public function update(){
 		
@@ -133,6 +134,20 @@ class Model{
 			// close_database_connection($link);
 		
 		return true;
+	}
+	public function delete_post($id){
+		//$link = open_database_connection();
+		$sql="DELETE FROM post WHERE id=?";
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->execute([$id]);
+		//$result = mysql_query($sql, $link);
+		
+		//$row = mysql_fetch_assoc($result);
+		//$post = $stmt->fetch();
+		
+		//close_database_connect ion($link);
+		
+		return $stmt;
 	}
 
 }

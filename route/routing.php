@@ -11,16 +11,28 @@ $request = Request::createFromGlobals();
 $uri = $request->getPathInfo();
 
 if ($uri == '/') {
-	$response=list_action();
-}elseif($uri=='/show' && $request->query->has('id')){
-	$response=show_action($request->query->get('id'));
+	$postsController=new PostsController();
+	$response=$postsController->list_action();
+}elseif($uri=='/show' AND $request->query->has('id')){
+	$postsController=new PostsController();
+	$response=$postsController->show_action($request->query->get('id'));
 }elseif($uri=='/admin'){
-	admin_action();
+	$postsController=new PostsController();
+	$response=$postsController->admin_action();
 }elseif($uri=='/add'){
-	add_action();
+	$postsController=new PostsController();
+	$response=$postsController->add_action();
 }elseif($uri=='/about'){
-	about_action();
+	$postsController=new PostsController();
+	$response=$postsController->about_action();
 }elseif($uri=='/update'){
-	update_action();
+	$postsController=new PostsController();
+	$response=$postsController->update_action();
+}elseif($uri=='/delete' AND $request->query->has('id')){
+	$postsController=new PostsController();
+	$response=$postsController->delete_action($request->query->get('id'));
+}elseif($uri=='/users'){
+	$usersController=new UsersController();
+	$response=$usersController->users_action();
 }
 

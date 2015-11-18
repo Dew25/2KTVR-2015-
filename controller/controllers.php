@@ -11,27 +11,26 @@ function render_template($path, array $args)
 }
 
 function list_action() {
-	$model=new Model();
-	$posts = $model->get_all_posts();
+	$postsModel=new PostsModel();
+	$posts = $postsModel->get_all_posts();
 	$html=render_template("view/template/list.php",array('posts'=>$posts));
 	return new Response($html);
 }
 function show_action($id){
-	$model=new Model();
-	$post=$model->get_post_by_id($id);
-	require 'view/template/show.php';
+	//$postsModel=new PostsModel();
+	$post=get_post_by_id($id);
+	$html=render_template('view/template/show.php',array('post'=>$post));
+	return new Response($html);
 }
 function admin_action(){
-	$model=new Model();
-	$posts = $model->get_all_posts();
-	global $test;
-	if($test==true)var_dump_to_file($posts,'log_posts.txt');
+	$postsModel=new PostsModel();
+	$posts = $postsModel->get_all_posts();
 	require 'view/template/admin.php';
 }
 
 function add_action(){
 //echo "hello controller1";
-	$model=new Model();
+	$model=new PostsModel();
 	$model->add_post();
 	$posts = $model->get_all_posts();
 //var_dump($posts);
@@ -44,9 +43,16 @@ function about_action()
 }
 
 function update_action(){
-	$model=new Model();
+	$model=new PostsModel();
 	$model->update();
-	$posts = Model::get_all_posts();
+	$posts = $model->get_all_posts();
+	require 'view/template/admin.php';
+
+}
+function delete_action(){
+	$model=new PostsModel();
+	$model->delete_post($_REQUEST['id']);
+	$posts = $model->get_all_posts();
 	require 'view/template/admin.php';
 
 }

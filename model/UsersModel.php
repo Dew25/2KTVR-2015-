@@ -33,7 +33,7 @@ private $dbh;
 		$sql='SELECT * FROM users';
 		$stmt=$this->dbh->query($sql);
 
-		//$result = mysql_query('SELECT id,title FROM post', $link);
+		//$result = mysql_query('SELECT * FROM users', $link);
 		$posts = array();
 		while ($row = $stmt->fetch()) {
 			$rows[] = $row;

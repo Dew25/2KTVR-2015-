@@ -34,7 +34,7 @@ class PostsModel{
 		$sql='SELECT id,title FROM post';
 		$stmt=$this->dbh->query($sql);
 
-		//$result = mysql_query('SELECT id,title FROM post', $link);
+		//$result = mysql_query('SELECT * FROM post', $link);
 		$posts = array();
 		while ($row = $stmt->fetch()) {
 			$posts[] = $row;

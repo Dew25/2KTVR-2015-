@@ -1,47 +1,33 @@
 <?php
-class UsersModel{
-
-private $dbh;
-	private $user="mvcpattern";
-	private $pass="mvcpattern";
-	private $db="mvcpattern";
-	private $charset="UTF8";
-	private $host="localhost";
-	
-	/**
-	*	Конструктор
-	*	http://phpfaq.ru/pdo
-	*/
-	function UsersModel(){	
-		$dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
-		$opt = array(
-		    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-		    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-		);
-		try {
-			$this->dbh = new PDO($dsn, $this->user, $this->pass, $opt);
-			
-		} catch (Exception $e) {
-			echo "error!";
-		}
-
-		
+class UsersModel extends DBH{
+	//конструктор класса
+	public function UsersModel()
+	{
+		parent::DBH('users');
 	}
-	public function get_all_rows() {
-		//$link = open_database_connection();
-		
-		$sql='SELECT * FROM users';
-		$stmt=$this->dbh->query($sql);
 
-		//$result = mysql_query('SELECT * FROM users', $link);
-		$posts = array();
-		while ($row = $stmt->fetch()) {
-			$rows[] = $row;
+	public function adduser(){
+		if(empty($_REQUEST['code']) 
+				AND empty($_REQUEST['firstname']) 
+					AND empty($_REQUEST['lastname'])){
+
+			echo "Пропущена запись!";
+			return false;
 		}
+			$code=$_REQUEST['code'];
+			$firstname=$_REQUEST['firstname'];
+			$lastname=$_REQUEST['lastname'];
+
+			$sql="INSERT INTO users (`code`,firstname,lastname)
+			VALUES (?, ?, ?)";
+			$stmt = $this->getDBH()->prepare($sql);
+			$stmt->execute(array($code,$firstname,$lastname));
+
+			//$link = open_database_connection();
+			//	mysql_query($sql, $link) OR die("Запрос не выполнен ".mysql_error());
+			//close_database_connection($link);
 		
-		//close_database_connection($link);
-		
-		return $rows;
+		return true;
 	}
 
 }

@@ -1,20 +1,20 @@
 <?php ob_start();?>
 
 	<h2>Администрирование странички</h2>
-<form action="/add" method="POST" name="add_form">
+<form action="/adduser" method="POST" name="add_form">
 
 	<table>
 		<tr>
-			<td>Автор: </td>
-			<td><input type="text" name="add_autor"></td>
+			<td>Личный номер пользователя: </td>
+			<td><input type="text" name="code"></td>
 		</tr>
 		<tr>
-			<td>Заголовок: </td>
-			<td><input type="text" name="add_title"></td>
+			<td>Имя пользователя: </td>
+			<td><input type="text" name="firstname"></td>
 		</tr>
 		<tr>
-			<td>Text: </td>
-			<td><input type="text" name="add_content"></td>
+			<td>Фамилия пользователя: </td>
+			<td><input type="text" name="lastname"></td>
 		</tr>
 		<tr>
 			<td><input type="reset" name="reset" value="Очистить"></td>
@@ -28,8 +28,8 @@
 		<?php //это коментарий
 		foreach ($rows as $row): ?>
 			<li>
-				<a href="/show?id=<?php echo $row['id'];?>">
-					<?php echo $post['title'];?>
+				<a href="/showuser?id=<?php echo $row['id'];?>">
+					<?php echo $row['firstname']." ".$row['lastname'];?>
 				</a>
 				<a href="/delete?id=<?php echo $row['id'];?>">
 					x

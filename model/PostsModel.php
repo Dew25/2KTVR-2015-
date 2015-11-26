@@ -1,48 +1,10 @@
 <?php
-class PostsModel{
-	private $dbh;
-	private $user="mvcpattern";
-	private $pass="mvcpattern";
-	private $db="mvcpattern";
-	private $charset="UTF8";
-	private $host="localhost";
-	
-	/**
-	*	Конструктор
-	*	http://phpfaq.ru/pdo
-	*/
-	function PostsModel(){	
-		$dsn = "mysql:host=$this->host;
-					dbname=$this->db;
-						charset=$this->charset";
-		$opt = array(
-		    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-		    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-		);
-		
-			$this->dbh = new PDO($dsn, $this->user, $this->pass, $opt);
+class PostsModel extends DBH {
 
-	}
-
-	/**
-	 * Добываем все записи из таблицы post
-	 * Возвращает массив записей таблицы $posts.
-	 */
-	public function get_all_posts() {
-		//$link = open_database_connection();
-		
-		$sql='SELECT id,title FROM post';
-		$stmt=$this->dbh->query($sql);
-
-		//$result = mysql_query('SELECT * FROM post', $link);
-		$posts = array();
-		while ($row = $stmt->fetch()) {
-			$posts[] = $row;
-		}
-		
-		//close_database_connection($link);
-		
-		return $posts;
+	//конструктор класса
+	public function PostsModel()
+	{
+		parent::DBH('post');
 	}
 
 	/**
@@ -54,7 +16,7 @@ class PostsModel{
 		//$link = open_database_connection();
 		$sql="SELECT `title`,`content`,`autor`,`date` 
 				FROM post WHERE id=?";
-		$stmt = $this->dbh->prepare($sql);
+		$stmt = $this->getDBH()->prepare($sql);
 		$stmt->execute([$id]);
 		//$result = mysql_query($sql, $link);
 		
@@ -87,7 +49,7 @@ class PostsModel{
 
 			$sql="INSERT INTO post (`date`,autor,title,content)
 			VALUES (?, ?, ?, ?)";
-			$stmt = $this->dbh->prepare($sql);
+			$stmt = $this->getDBH()->prepare($sql);
 			$stmt->execute(array($add_date,$add_autor,
 				$add_title,$add_content));
 
@@ -98,13 +60,7 @@ class PostsModel{
 		return true;
 	}
 
-	/**
-	 * 
-	 * 
-	 * Возвращает:
-	 * false - если обновление неудалось
-	 * true  - если обновение сделано.
-	 */
+	
 	/**
 	 * Обновляем запись с $id=$_REQUEST['id'];
 	 * @return boolean	удалось или неудалось обновление
@@ -127,7 +83,7 @@ class PostsModel{
 
 			$sql="UPDATE `post` SET `date`=?,`autor`=?,
 				`title`=?,`content`=? WHERE id=?";
-			$stmt = $this->dbh->prepare($sql);
+			$stmt = $this->getDBH()->prepare($sql);
 			$stmt->execute(array($date,$autor,$title,$content,$id));
 			// $link = open_database_connection();
 			// 	mysql_query($sql, $link) OR die("Запрос не выполнен ".mysql_error());
@@ -138,7 +94,7 @@ class PostsModel{
 	public function delete_post($id){
 		//$link = open_database_connection();
 		$sql="DELETE FROM post WHERE id=?";
-		$stmt = $this->dbh->prepare($sql);
+		$stmt = $this->getDBH()->prepare($sql);
 		$stmt->execute([$id]);
 		//$result = mysql_query($sql, $link);
 		

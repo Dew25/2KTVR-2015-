@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 $request = Request::createFromGlobals();
 $uri = $request->getPathInfo();
 
+//++++++++++++ POSTS МАРШРУТЫ
 if ($uri == '/') {
 	$postsController=new PostsController();
 	$response=$postsController->list_action();
@@ -31,8 +32,19 @@ if ($uri == '/') {
 }elseif($uri=='/delete' AND $request->query->has('id')){
 	$postsController=new PostsController();
 	$response=$postsController->delete_action($request->query->get('id'));
-}elseif($uri=='/users'){
+}
+//++++++++ USERS маршруты
+elseif($uri=='/users'){
 	$usersController=new UsersController();
 	$response=$usersController->users_action();
+}elseif($uri=='/adminuser'){
+	$usersController=new UsersController();
+	$response=$usersController->adminuser_action();
+}elseif($uri=='/adduser'){
+	$usersController=new UsersController();
+	$response=$usersController->adduser_action();
+}else{
+
+	$response=new Response("<h1>Нет такой страники</h1>");
 }
 

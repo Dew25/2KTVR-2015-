@@ -15,22 +15,22 @@ private function render_template($path, array $args)
 
 public function list_action() {
 	$postsModel=new PostsModel();
-	$posts = $postsModel->get_all_posts();
-	$html=$this->render_template("view/template/list.php",array('posts'=>$posts));
+	$rows = $postsModel->get_all_rows();
+	$html=$this->render_template("view/template/list.php",array('rows'=>$rows));
 	return new Response($html);
 }
 public function show_action($id){
 	$postsModel=new PostsModel();
-	$post=$postsModel->get_post_by_id($id);
-	$html=$this->render_template("view/template/show.php",array('post'=>$post));
+	$row=$postsModel->get_post_by_id($id);
+	$html=$this->render_template("view/template/show.php",array('row'=>$row));
 	return new Response($html);
 	//require 'view/template/show.php';
 }
 public function delete_action($id){
 	$postsModel=new PostsModel();
 	$postsModel->delete_post($id);
-	$posts = $postsModel->get_all_posts();
-	$html=$this->render_template("view/template/admin.php",array('posts'=>$posts));
+	$rows = $postsModel->get_all_rows();
+	$html=$this->render_template("view/template/admin.php",array('rows'=>$rows));
 	return new Response($html);
 	//require 'view/template/admin.php';
 }
@@ -38,15 +38,15 @@ public function add_action(){
 //echo "hello controller1";
 	$model=new PostsModel();
 	$model->add_post();
-	$posts = $model->get_all_posts();
-	$html=$this->render_template("view/template/admin.php",array('posts'=>$posts));
+	$rows = $model->get_all_rows();
+	$html=$this->render_template("view/template/admin.php",array('rows'=>$rows));
 	return new Response($html);
 	//require 'view/template/admin.php';
 }
 public function admin_action(){
 	$postsModel=new PostsModel();
-	$posts = $postsModel->get_all_posts();
-	$html=$this->render_template("view/template/admin.php",array('posts'=>$posts));
+	$rows = $postsModel->get_all_rows();
+	$html=$this->render_template("view/template/admin.php",array('rows'=>$rows));
 	return new Response($html);
 	require 'view/template/admin.php';
 }

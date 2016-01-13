@@ -1,6 +1,6 @@
 <?php ob_start();?>
 
-	<h2>Администрирование странички</h2>
+<h2>Администрирование странички</h2>
 <form action="/add" method="POST" name="add_form">
 
 	<table>
